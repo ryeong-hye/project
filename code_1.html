@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>배움을 즐기고, 도전으로 성장하는 사람</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Pretendard Font (Local/CDN Webfont) -->
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        softBlue: {
+                            50: '#f0f6fc',
+                            100: '#e1eef9',
+                            500: '#4A90E2',
+                            600: '#357ABD',
+                            700: '#2c639a',
+                        },
+                        mintGreen: {
+                            50: '#f1fbf7',
+                            100: '#def7ee',
+                            500: '#5BC8A5',
+                            600: '#46b08f',
+                        },
+                        warmGray: {
+                            50: '#FAFBFD',
+                            100: '#F5F6F8',
+                            200: '#EAECEF',
+                            800: '#2D3139',
+                            900: '#1F2228',
+                        },
+                        coral: {
+                            50: '#fff3f0',
+                            100: '#ffe4dd',
+                            500: '#FF8A65',
+                            600: '#e57351',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Pretendard', 'Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 3s infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Pretendard', 'Inter', sans-serif;
+            background-color: #F5F6F8;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #F5F6F8;
+        }
+        .dark ::-webkit-scrollbar-track {
+            background: #1F2228;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4A90E2;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #357ABD;
+        }
+    </style>
+</head>
+<body class="text-slate-800 dark:text-slate-100 antialiased bg-warmGray-50 dark:bg-warmGray-900 overflow-x-hidden">
+
+    <!-- Navigation Bar -->
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-warmGray-50/80 dark:bg-warmGray-900/80 backdrop-blur-md border-b border-warmGray-200/50 dark:border-warmGray-800/50">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a href="#" class="flex items-center space-x-2 font-bold text-xl text-softBlue-500 hover:opacity-90 transition-opacity">
+                <span class="p-1.5 bg-softBlue-500 text-white rounded-lg flex items-center justify-center">
+                    <i data-lucide="sparkles" class="w-5 h-5"></i>
+                </span>
+                <span class="tracking-tight text-slate-900 dark:text-white">GrowthPath</span>
+            </a>
+            
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium">
+                <a href="#about" class="text-slate-600 dark:text-slate-300 hover:text-softBlue-500 dark:hover:text-softBlue-500 transition-colors">소개</a>
+                <a href="#story" class="text-slate-600 dark:text-slate-300 hover:text-softBlue-500 dark:hover:text-softBlue-500 transition-colors">성장 히스토리</a>
+                <a href="#strengths" class="text-slate-600 dark:text-slate-300 hover:text-softBlue-500 dark:hover:text-softBlue-500 transition-colors">핵심 역량</a>
+                <a href="#cta" class="px-4 py-2 rounded-xl bg-softBlue-500 hover:bg-softBlue-600 text-white shadow-md shadow-softBlue-500/20 transition-all transform hover:-translate-y-0.5">협업 제안</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <!-- Theme Toggle Button -->
+                <button id="theme-toggle" class="p-2 rounded-xl bg-warmGray-200 dark:bg-warmGray-800 text-slate-700 dark:text-slate-300 hover:bg-warmGray-300 dark:hover:bg-warmGray-700 transition-colors" aria-label="Toggle Dark Mode">
+                    <i data-lucide="sun" class="w-5 h-5 hidden dark:block text-coral-500"></i>
+                    <i data-lucide="moon" class="w-5 h-5 block dark:hidden text-softBlue-500"></i>
+                </button>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-warmGray-200 dark:hover:bg-warmGray-800 transition-colors">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-warmGray-50 dark:bg-warmGray-900 border-b border-warmGray-200 dark:border-warmGray-800 px-6 py-4 space-y-3">
+            <a href="#about" class="block py-2 text-slate-600 dark:text-slate-300 hover:text-softBlue-500">소개</a>
+            <a href="#story" class="block py-2 text-slate-600 dark:text-slate-300 hover:text-softBlue-500">성장 히스토리</a>
+            <a href="#strengths" class="block py-2 text-slate-600 dark:text-slate-300 hover:text-softBlue-500">핵심 역량</a>
+            <a href="#cta" class="block py-2.5 px-4 rounded-xl bg-softBlue-500 text-white text-center font-medium shadow-md">협업 제안</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative min-h-screen pt-32 pb-20 flex flex-col justify-center overflow-hidden">
+        <!-- Floating Deco Elements -->
+        <div class="absolute top-1/4 left-10 w-72 h-72 bg-softBlue-500/10 rounded-full filter blur-3xl -z-10 animate-pulse-slow"></div>
+        <div class="absolute bottom-1/4 right-10 w-96 h-96 bg-mintGreen-500/10 rounded-full filter blur-3xl -z-10 animate-pulse-slow" style="animation-delay: 2s;"></div>
+        
+        <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            
+            <!-- Left Text Content -->
+            <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-softBlue-100 dark:bg-softBlue-500/20 text-softBlue-600 dark:text-softBlue-400 text-xs font-semibold tracking-wider uppercase">
+                    <span class="flex h-2 w-2 relative">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-softBlue-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-softBlue-500"></span>
+                    </span>
+                    <span>Ready for Collaboration</span>
+                </div>
+                
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                    안녕하세요, <br class="hidden sm:block">
+                    <span id="catchphrase-text" class="text-transparent bg-clip-text bg-gradient-to-r from-softBlue-500 via-mintGreen-500 to-coral-500 transition-all duration-500">
+                        배움을 즐기고, 도전으로 성장하는
+                    </span><br>
+                    개발 지망생입니다.
+                </h1>
+
+                <!-- Catchphrase Selector Tabs for visitor interactive feel -->
+                <div class="bg-warmGray-100 dark:bg-warmGray-800 p-1.5 rounded-2xl flex flex-wrap gap-1 justify-center lg:justify-start max-w-lg shadow-inner">
+                    <button class="catchphrase-tab active px-3.5 py-2 text-xs font-medium rounded-xl transition-all duration-300 bg-white dark:bg-warmGray-700 text-slate-800 dark:text-white shadow-sm" data-phrase="배움을 즐기고, 도전으로 성장하는">
+                        🌱 성장형 리더
+                    </button>
+                    <button class="catchphrase-tab px-3.5 py-2 text-xs font-medium rounded-xl transition-all duration-300 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white" data-phrase="새로운 분야를 배우며 가능성을 넓혀가는">
+                        🚀 가능성의 탐색자
+                    </button>
+                    <button class="catchphrase-tab px-3.5 py-2 text-xs font-medium rounded-xl transition-all duration-300 text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-white" data-phrase="호기심을 실행으로 바꾸며 끊임없이 성장하는">
+                        💡 실행 중심주의
+                    </button>
+                </div>
+
+                <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-xl leading-relaxed mx-auto lg:mx-0">
+                    새로운 환경에서 누구보다 빠르게 지식을 흡수하며, <span class="font-semibold text-softBlue-500">원활한 소통</span>을 통해 팀의 잠재력을 높이는 협업 파트너를 찾고 계시나요? 저와 함께 시너지를 낼 준비가 된 분들을 환영합니다.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
+                    <a href="#story" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-softBlue-500 to-mintGreen-500 text-white text-center font-semibold shadow-lg shadow-softBlue-500/20 hover:shadow-xl hover:shadow-softBlue-500/30 hover:-translate-y-1 transition-all duration-300">
+                        스토리 보러가기
+                    </a>
+                    <a href="#cta" class="w-full sm:w-auto px-8 py-4 rounded-xl border border-warmGray-300 dark:border-warmGray-700 bg-white dark:bg-warmGray-800 hover:bg-warmGray-100 dark:hover:bg-warmGray-700 text-slate-700 dark:text-slate-200 text-center font-semibold transition-all duration-300">
+                        커피챗 제안하기
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Interactive Illustration/Avatar Card -->
+            <div class="lg:col-span-5 relative flex justify-center">
+                <div class="relative w-72 h-72 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-3xl overflow-hidden p-1.5 bg-gradient-to-tr from-softBlue-500 via-mintGreen-500 to-coral-500 shadow-2xl transition-all hover:scale-[1.02] duration-300">
+                    <div class="w-full h-full bg-white dark:bg-warmGray-800 rounded-[22px] flex flex-col justify-between p-6 sm:p-8 relative overflow-hidden">
+                        
+                        <!-- Mini Interactive Card Content -->
+                        <div class="flex items-center justify-between">
+                            <div class="flex space-x-2">
+                                <span class="w-3.5 h-3.5 rounded-full bg-coral-500"></span>
+                                <span class="w-3.5 h-3.5 rounded-full bg-mintGreen-500"></span>
+                                <span class="w-3.5 h-3.5 rounded-full bg-softBlue-500"></span>
+                            </div>
+                            <span class="text-xs text-slate-400 dark:text-slate-500">v1.2.6.portfolio</span>
+                        </div>
+
+                        <!-- Central Graphic (Avatar with Soft Gradients and Icons) -->
+                        <div class="my-auto py-6 flex flex-col items-center justify-center space-y-4">
+                            <div class="relative">
+                                <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-tr from-softBlue-50 to-mintGreen-50 dark:from-warmGray-700 dark:to-warmGray-600 flex items-center justify-center text-4xl shadow-md border-2 border-warmGray-200 dark:border-warmGray-600">
+                                    😊
+                                </div>
+                                <div class="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-mintGreen-500 text-white flex items-center justify-center shadow-lg">
+                                    <i data-lucide="sparkles" class="w-4 h-4 animate-bounce-slow"></i>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <h3 class="font-bold text-lg text-slate-800 dark:text-white">성장 지향적 메이커</h3>
+                                <p class="text-xs text-softBlue-500 font-medium">SSAFY 11기 교육생</p>
+                            </div>
+                        </div>
+
+                        <!-- Tech/Keywords badge pile inside graphics card -->
+                        <div class="flex flex-wrap gap-1.5 justify-center mt-auto">
+                            <span class="px-2.5 py-1 rounded-lg bg-softBlue-50 dark:bg-warmGray-700 text-[10px] sm:text-xs text-softBlue-600 dark:text-softBlue-400 font-semibold border border-softBlue-100 dark:border-softBlue-500/20">🌱 성장중</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-mintGreen-50 dark:bg-warmGray-700 text-[10px] sm:text-xs text-mintGreen-600 dark:text-mintGreen-400 font-semibold border border-mintGreen-100 dark:border-mintGreen-500/20">🤝 소통중심</span>
+                            <span class="px-2.5 py-1 rounded-lg bg-coral-50 dark:bg-warmGray-700 text-[10px] sm:text-xs text-coral-600 dark:text-coral-400 font-semibold border border-coral-100 dark:border-coral-500/20">🔥 강력한 실행력</span>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Scroll down indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex flex-col items-center space-y-2 cursor-pointer opacity-80 hover:opacity-100 transition-opacity">
+            <a href="#about" class="flex flex-col items-center">
+                <span class="text-xs font-semibold text-slate-400 tracking-wider uppercase">Scroll Down</span>
+                <i data-lucide="chevron-down" class="w-5 h-5 text-softBlue-500 animate-bounce mt-1"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white dark:bg-warmGray-800/30 border-y border-warmGray-200/50 dark:border-warmGray-800/50 relative">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+                <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+                    어떤 협업자인가요?
+                </h2>
+                <div class="h-1.5 w-16 bg-softBlue-500 mx-auto rounded-full"></div>
+                <p class="text-slate-500 dark:text-slate-400 leading-relaxed text-sm sm:text-base">
+                    단순한 코드 작성을 넘어 비즈니스 도메인의 본질을 이해하고, 소통을 통해 기술을 사람의 가치로 전환할 수 있는 파트너가 되고자 합니다.
+                </p>
+            </div>
+
+            <!-- Key Target Visitor Value Card Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+                <!-- Card 1: Fast Learner -->
+                <div class="bg-warmGray-50 dark:bg-warmGray-800 p-8 rounded-2xl border border-warmGray-200 dark:border-warmGray-700 flex flex-col justify-between transition-all hover:scale-[1.01] hover:shadow-lg">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-xl bg-softBlue-50 dark:bg-softBlue-500/20 text-softBlue-500 flex items-center justify-center">
+                            <i data-lucide="zap" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">낯선 환경에서 발휘되는 생명력</h3>
+                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm sm:text-base">
+                            기관공학에서 보안, 클라우드, 그리고 최종 개발자가 되기까지, 마주하는 환경마다 주저하지 않고 배움에 투신했습니다. 낯선 기술을 두려워하지 않으며 도메인을 신속하게 이해합니다.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 2: Communicator -->
+                <div class="bg-warmGray-50 dark:bg-warmGray-800 p-8 rounded-2xl border border-warmGray-200 dark:border-warmGray-700 flex flex-col justify-between transition-all hover:scale-[1.01] hover:shadow-lg">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-xl bg-mintGreen-50 dark:bg-mintGreen-500/20 text-mintGreen-500 flex items-center justify-center">
+                            <i data-lucide="users" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white">사람과 기술을 이어주는 브릿지</h3>
+                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm sm:text-base">
+                            보안 컨설턴트 및 IT 기획자로 실무자들과 발맞추었던 경험을 밑거름 삼아, 개발을 모르는 이해관계자 및 동료 팀원들과의 부드럽고 정확한 마찰 없는 커뮤니케이션을 주도합니다.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Warm Greeting Message Box -->
+            <div class="mt-12 bg-coral-50/70 dark:bg-coral-500/10 p-6 sm:p-8 rounded-2xl border border-coral-200/50 dark:border-coral-500/20 text-center max-w-3xl mx-auto">
+                <p class="text-coral-700 dark:text-coral-300 font-medium leading-relaxed text-sm sm:text-base">
+                    🤝 <strong>"새로운 환경에서 빠르게 배우고, 소통하며 함께 성장하는 사람"</strong> <br class="hidden sm:block">
+                    팀원에게 편안함을, 비즈니스에는 안정성과 확고한 실행력을 선사하는 팀원이 될 것을 약속드립니다.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Storytelling Timeline Section -->
+    <section id="story" class="py-24 bg-warmGray-50 dark:bg-warmGray-900 relative">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+                <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+                    성장 여정 타임라인
+                </h2>
+                <div class="h-1.5 w-16 bg-mintGreen-500 mx-auto rounded-full"></div>
+                <p class="text-slate-500 dark:text-slate-400 leading-relaxed text-sm sm:text-base">
+                    이론에 머무르지 않고, 끝없는 호기심을 직접 실행하며 쌓아 올린 융합적 경험의 자취를 소개합니다.
+                </p>
+            </div>
+
+            <!-- Mobile & Desktop Integrated Timeline Layout -->
+            <div class="relative border-l-2 border-warmGray-200 dark:border-warmGray-800 ml-4 sm:ml-8 md:ml-32 py-4 space-y-12">
+                
+                <!-- Timeline Item 1 -->
+                <div class="relative timeline-item" data-index="1">
+                    <!-- Point marker -->
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-softBlue-500 ring-4 ring-white dark:ring-warmGray-900 transition-all duration-300"></div>
+                    <!-- Sidebar Label (Desktop) -->
+                    <div class="hidden md:block absolute -left-36 text-right w-28 top-1">
+                        <span class="text-xs font-semibold text-slate-400">START</span>
+                        <h4 class="text-sm font-bold text-slate-700 dark:text-slate-300">기관공학 전공</h4>
+                    </div>
+                    <!-- Contents -->
+                    <div class="pl-6 sm:pl-10">
+                        <div class="bg-white dark:bg-warmGray-800 p-6 rounded-2xl shadow-sm border border-warmGray-200 dark:border-warmGray-700 hover:shadow-md transition-all">
+                            <span class="md:hidden block text-xs font-semibold text-softBlue-500 mb-1">기관공학 전공</span>
+                            <div class="flex items-center space-x-2 text-slate-500 dark:text-slate-400 mb-2">
+                                <i data-lucide="anchor" class="w-4 h-4"></i>
+                                <span class="text-xs font-medium">전공을 통한 시스템적 논리 구성 학습</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">거대 하드웨어와 엔지니어링 마인드의 결합</h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm mt-2 leading-relaxed">
+                                기계장치 시스템을 탐구하며 복합적인 유기체 구조를 이해하는 <span class="font-semibold text-slate-700 dark:text-white">엔지니어링 마인드</span>의 뿌리를 마련했습니다. 물리적 문제의 근본 원인을 파악해 나가는 훈련은 훗날 복잡한 디버깅 및 시스템 분석을 즐기게 하는 토대가 되었습니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 2 -->
+                <div class="relative timeline-item" data-index="2">
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-mintGreen-500 ring-4 ring-white dark:ring-warmGray-900 transition-all duration-300"></div>
+                    <div class="hidden md:block absolute -left-36 text-right w-28 top-1">
+                        <span class="text-xs font-semibold text-slate-400">CHALLENGE</span>
+                        <h4 class="text-sm font-bold text-slate-700 dark:text-slate-300">보안 컨설턴트</h4>
+                    </div>
+                    <div class="pl-6 sm:pl-10">
+                        <div class="bg-white dark:bg-warmGray-800 p-6 rounded-2xl shadow-sm border border-warmGray-200 dark:border-warmGray-700 hover:shadow-md transition-all">
+                            <span class="md:hidden block text-xs font-semibold text-mintGreen-500 mb-1">보안 컨설턴트</span>
+                            <div class="flex items-center space-x-2 text-slate-500 dark:text-slate-400 mb-2">
+                                <i data-lucide="shield" class="w-4 h-4 text-mintGreen-500"></i>
+                                <span class="text-xs font-medium">첫 번째 도전: 정보기술 인프라 수호</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">보안 컨설턴트로서 시각을 확장하다</h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm mt-2 leading-relaxed">
+                                IT 생태계의 복합적인 보안 위협을 예방하고 체계를 구축하는 컨설팅을 도맡았습니다. 이 과정에서 <span class="font-semibold text-slate-700 dark:text-white">네트워크 인프라, 암호학 원리, 시스템 컴플라이언스</span>를 경험하며 탄탄한 인프라 안전 지식을 길러낼 수 있었습니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 3 -->
+                <div class="relative timeline-item" data-index="3">
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-coral-500 ring-4 ring-white dark:ring-warmGray-900 transition-all duration-300"></div>
+                    <div class="hidden md:block absolute -left-36 text-right w-28 top-1">
+                        <span class="text-xs font-semibold text-slate-400">GROWTH</span>
+                        <h4 class="text-sm font-bold text-slate-700 dark:text-slate-300">AI / Cloud 학습</h4>
+                    </div>
+                    <div class="pl-6 sm:pl-10">
+                        <div class="bg-white dark:bg-warmGray-800 p-6 rounded-2xl shadow-sm border border-warmGray-200 dark:border-warmGray-700 hover:shadow-md transition-all">
+                            <span class="md:hidden block text-xs font-semibold text-coral-500 mb-1">AI / Cloud 학습</span>
+                            <div class="flex items-center space-x-2 text-slate-500 dark:text-slate-400 mb-2">
+                                <i data-lucide="cloud-lightning" class="w-4 h-4 text-coral-500"></i>
+                                <span class="text-xs font-medium">두 번째 전환: 최신 기술 가치 흡수</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">AI 및 클라우드로의 한 단계 높은 확장</h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm mt-2 leading-relaxed">
+                                인프라 보호에 머무르지 않고, 비즈니스 효율을 극대화하는 클라우드 네이티브 설계와 기계 학습(AI)에 강한 관심을 가지고 자기 주도적 몰입 학습을 진행했습니다. 미래지향적 가치를 기술에 도입하는 방법을 터득했습니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 4 -->
+                <div class="relative timeline-item" data-index="4">
+                    <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-softBlue-500 ring-4 ring-white dark:ring-warmGray-900 transition-all duration-300"></div>
+                    <div class="hidden md:block absolute -left-36 text-right w-28 top-1">
+                        <span class="text-xs font-semibold text-slate-400">STRATEGY</span>
+                        <h4 class="text-sm font-bold text-slate-700 dark:text-slate-300">IT 기획</h4>
+                    </div>
+                    <div class="pl-6 sm:pl-10">
+                        <div class="bg-white dark:bg-warmGray-800 p-6 rounded-2xl shadow-sm border border-warmGray-200 dark:border-warmGray-700 hover:shadow-md transition-all">
+                            <span class="md:hidden block text-xs font-semibold text-softBlue-500 mb-1">IT 기획</span>
+                            <div class="flex items-center space-x-2 text-slate-500 dark:text-slate-400 mb-2">
+                                <i data-lucide="briefcase" class="w-4 h-4 text-softBlue-500"></i>
+                                <span class="text-xs font-medium">세 번째 가치: 요구사항 조율 및 설계</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">아이디어를 현실성 높은 비즈니스로 구조화</h3>
+                            <p class="text-slate-600 dark:text-slate-400 text-sm mt-2 leading-relaxed">
+                                추상적인 기획 요구 사항을 기능 단위로 재정의하고 개발 로드맵을 수립하며, 소통 부재에 따른 병목 현상을 미리 예측하고 관리하는 안목을 가졌습니다. 비로소 <span class="font-semibold text-slate-700 dark:text-white">사용자 요구 중심적 시각</span>으로 소프트웨어를 설계하는 감각을 기르게 되었습니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Item 5 -->
+                <div class="relative timeline-item" data-index="5">
+                    <div class="absolute -left-[9px] top-1.5 w-4.5 h-4.5 rounded-full bg-gradient-to-r from-softBlue-500 to-mintGreen-500 ring-4 ring-white dark:ring-warmGray-900 transition-all duration-300 animate-pulse"></div>
+                    <div class="hidden md:block absolute -left-36 text-right w-28 top-1">
+                        <span class="text-xs font-bold text-mintGreen-500">NOW</span>
+                        <h4 class="text-sm font-bold text-slate-900 dark:text-slate-100">개발자 성장(SSAFY)</h4>
+                    </div>
+                    <div class="pl-6 sm:pl-10">
+                        <div class="bg-gradient-to-r from-softBlue-50/50 to-mintGreen-50/50 dark:from-softBlue-950/20 dark:to-mintGreen-950/20 p-6 rounded-2xl shadow-md border-2 border-softBlue-500/20 dark:border-softBlue-500/40 hover:shadow-lg transition-all">
+                            <span class="md:hidden block text-xs font-bold text-mintGreen-500 mb-1">현재 - 개발 성장 (SSAFY)</span>
+                            <div class="flex items-center space-x-2 text-slate-600 dark:text-slate-300 mb-2">
+                                <i data-lucide="award" class="w-4 h-4 text-mintGreen-600"></i>
+                                <span class="text-xs font-bold">네 번째 도약: 본격적 개발 중심 몰입</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-slate-900 dark:text-white">삼성 청년 SW 아카데미를 통한 가치 실현</h3>
+                            <p class="text-slate-700 dark:text-slate-300 text-sm mt-2 leading-relaxed">
+                                기획한 내용을 손수 완성도 높은 제품으로 빌드하기 위해 SSAFY에 입과하여 몰두하고 있습니다. 다양한 가치 융합의 이력과 탄탄하게 다져온 프로그래밍 문법 구조 이해를 바탕으로, <span class="font-semibold text-softBlue-500">팀의 기둥이 되는 뛰어난 동료</span>로 진화 중입니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Strengths Section -->
+    <section id="strengths" class="py-24 bg-white dark:bg-warmGray-800/30 relative">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+                <h2 class="text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+                    어떤 가치를 전달할 수 있나요?
+                </h2>
+                <div class="h-1.5 w-16 bg-coral-500 mx-auto rounded-full"></div>
+                <p class="text-slate-500 dark:text-slate-400 leading-relaxed text-sm sm:text-base">
+                    과거에 다듬어 온 유니크한 경험들이 고스란히 개발자로서의 핵심 4대 매력 포인트가 되었습니다.
+                </p>
+            </div>
+
+            <!-- Responsive Card Layout (Grid) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Strength Card 1 -->
+                <div class="group relative bg-warmGray-50 dark:bg-warmGray-800 p-6 rounded-2xl border border-warmGray-200/60 dark:border-warmGray-700 transition-all hover:scale-[1.03] hover:shadow-xl hover:border-softBlue-500/50 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-xl bg-softBlue-500/10 text-softBlue-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i data-lucide="mouse-pointer-click" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-950 dark:text-white group-hover:text-softBlue-500 transition-colors">빠른 학습력으로<br>기술을 흡수하는 인재</h3>
+                        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                            기관공학에서 IT 신기술 교육까지 빠르게 습득한 지식을 실제 프로젝트 설계에 빠르게 녹여내는 흡수력이 최대 무기입니다.
+                        </p>
+                    </div>
+                    <div class="pt-4 mt-4 border-t border-warmGray-200 dark:border-warmGray-700/60 flex justify-between items-center text-[11px] text-slate-400">
+                        <span>#지적호기심</span>
+                        <span class="text-softBlue-500">99%</span>
+                    </div>
+                </div>
+
+                <!-- Strength Card 2 -->
+                <div class="group relative bg-warmGray-50 dark:bg-warmGray-800 p-6 rounded-2xl border border-warmGray-200/60 dark:border-warmGray-700 transition-all hover:scale-[1.03] hover:shadow-xl hover:border-mintGreen-500/50 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-xl bg-mintGreen-500/10 text-mintGreen-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i data-lucide="zap" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-950 dark:text-white group-hover:text-mintGreen-500 transition-colors">도전을 경험으로<br>전환하는 실행력</h3>
+                        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                            망설이기보단 기획한 바를 바로 구현하고 눈으로 검증하는 프로토타이핑을 사랑합니다. 실패를 두려워하지 않고 발로 뛰어 성취합니다.
+                        </p>
+                    </div>
+                    <div class="pt-4 mt-4 border-t border-warmGray-200 dark:border-warmGray-700/60 flex justify-between items-center text-[11px] text-slate-400">
+                        <span>#추진속도</span>
+                        <span class="text-mintGreen-500">100%</span>
+                    </div>
+                </div>
+
+                <!-- Strength Card 3 -->
+                <div class="group relative bg-warmGray-50 dark:bg-warmGray-800 p-6 rounded-2xl border border-warmGray-200/60 dark:border-warmGray-700 transition-all hover:scale-[1.03] hover:shadow-xl hover:border-coral-500/50 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-xl bg-coral-500/10 text-coral-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i data-lucide="message-circle-code" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-950 dark:text-white group-hover:text-coral-500 transition-colors">기술과 사람을<br>잇는 커뮤니케이션</h3>
+                        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                            타 부서와 개발 그룹 간 소통 부재를 유연한 질문력과 매끄러운 단어 선택으로 해소해 냅니다. 기획과 소통이 부드러운 개발 팀원입니다.
+                        </p>
+                    </div>
+                    <div class="pt-4 mt-4 border-t border-warmGray-200 dark:border-warmGray-700/60 flex justify-between items-center text-[11px] text-slate-400">
+                        <span>#오픈마인드</span>
+                        <span class="text-coral-500">Perfect</span>
+                    </div>
+                </div>
+
+                <!-- Strength Card 4 -->
+                <div class="group relative bg-warmGray-50 dark:bg-warmGray-800 p-6 rounded-2xl border border-warmGray-200/60 dark:border-warmGray-700 transition-all hover:scale-[1.03] hover:shadow-xl hover:border-softBlue-500/50 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="w-12 h-12 rounded-xl bg-softBlue-500/10 text-softBlue-500 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            <i data-lucide="combine" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-slate-950 dark:text-white group-hover:text-softBlue-500 transition-colors">융합적 사고방식의<br>다채로운 관점</h3>
+                        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+                            한 가지 수단에만 매몰되지 않고, 비즈니스 목적, 인프라 보안, 사용자 경험을 종합적으로 고려한 융합적 가치를 서비스에 입힙니다.
+                        </p>
+                    </div>
+                    <div class="pt-4 mt-4 border-t border-warmGray-200 dark:border-warmGray-700/60 flex justify-between items-center text-[11px] text-slate-400">
+                        <span>#통합설계</span>
+                        <span class="text-softBlue-500">Expert</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Call To Action Section -->
+    <section id="cta" class="py-24 bg-gradient-to-tr from-softBlue-500/90 via-softBlue-600 to-mintGreen-500 text-white relative overflow-hidden">
+        <!-- Floating bubbles design -->
+        <div class="absolute top-1/2 left-1/3 w-80 h-80 bg-white/10 rounded-full filter blur-2xl -z-10 animate-bounce-slow"></div>
+        <div class="absolute -bottom-10 right-10 w-96 h-96 bg-mintGreen-400/20 rounded-full filter blur-2xl -z-10"></div>
+        
+        <div class="max-w-4xl mx-auto px-6 text-center space-y-8 relative z-10">
+            <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+                준비된 러닝메이트와 <br class="sm:hidden"> 함께 성장할 준비가 되셨나요?
+            </h2>
+            <p class="text-white/80 max-w-xl mx-auto text-sm sm:text-lg leading-relaxed">
+                정체되지 않고 매일 도약하는 팀원을 원하신다면 제안해 주세요. 
+                언제든 캐주얼한 티타임이나 프로젝트 관련 소통을 기다리고 있습니다!
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 max-w-md mx-auto pt-4">
+                <!-- Interactive Copy button for email -->
+                <button id="copy-email" class="w-full sm:w-auto px-6 py-3.5 bg-white text-softBlue-600 font-bold rounded-xl shadow-lg hover:shadow-xl hover:scale-[1.02] active:scale-95 flex items-center justify-center space-x-2 transition-all">
+                    <i data-lucide="copy" class="w-4 h-4"></i>
+                    <span>이메일 주소 복사하기</span>
+                </button>
+                <a href="mailto:growth_partner@ssafy.com" class="w-full sm:w-auto px-6 py-3.5 bg-softBlue-700/50 border border-white/30 text-white font-bold rounded-xl hover:bg-softBlue-700/80 active:scale-95 flex items-center justify-center space-x-2 transition-all">
+                    <i data-lucide="mail" class="w-4 h-4"></i>
+                    <span>직접 메일 쓰기</span>
+                </a>
+            </div>
+
+            <!-- Virtual Success Alert Container (Toast Message) -->
+            <div id="toast-message" class="hidden fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-warmGray-900 text-white px-6 py-3 rounded-full shadow-2xl z-50 flex items-center space-x-2 border border-warmGray-800 text-sm">
+                <i data-lucide="check-circle" class="w-4 h-4 text-mintGreen-500"></i>
+                <span class="font-medium">이메일 주소가 클립보드에 복사되었습니다!</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-warmGray-100 dark:bg-warmGray-950 py-12 border-t border-warmGray-200 dark:border-warmGray-900 transition-colors">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center space-x-2">
+                <span class="p-1.5 bg-softBlue-500 text-white rounded-lg flex items-center justify-center">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                </span>
+                <span class="font-bold tracking-tight text-slate-800 dark:text-white">GrowthPath</span>
+                <span class="text-xs text-slate-400">© 2026. All rights reserved.</span>
+            </div>
+
+            <!-- Visual badge stack for stack reference -->
+            <div class="flex flex-wrap gap-4 text-xs text-slate-500 dark:text-slate-400">
+                <span class="hover:text-softBlue-500 transition-colors">Vanilla HTML</span>
+                <span class="text-slate-300">|</span>
+                <span class="hover:text-mintGreen-500 transition-colors">Tailwind CSS</span>
+                <span class="text-slate-300">|</span>
+                <span class="hover:text-coral-500 transition-colors">Pretendard + Inter</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // DOMContentLoaded block to ensure all elements exist before attaching triggers
+        document.addEventListener('DOMContentLoaded', () => {
+            // Lucide Icons Render
+            lucide.createIcons();
+
+            // 1. Theme Switcher Logic
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            
+            // Check user system preference
+            if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+
+            themeToggleBtn.addEventListener('click', () => {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                }
+            });
+
+            // 2. Mobile Nav Menu Logic
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Close mobile menu on click links
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // 3. Interactive Catchphrase Switcher
+            const phraseTextEl = document.getElementById('catchphrase-text');
+            const tabs = document.querySelectorAll('.catchphrase-tab');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Update active state style
+                    tabs.forEach(t => {
+                        t.classList.remove('bg-white', 'dark:bg-warmGray-700', 'text-slate-800', 'dark:text-white', 'shadow-sm', 'active');
+                        t.classList.add('text-slate-500', 'dark:text-slate-400');
+                    });
+                    
+                    this.classList.add('bg-white', 'dark:bg-warmGray-700', 'text-slate-800', 'dark:text-white', 'shadow-sm', 'active');
+                    this.classList.remove('text-slate-500', 'dark:text-slate-400');
+
+                    // Animation effect
+                    phraseTextEl.style.opacity = '0';
+                    setTimeout(() => {
+                        phraseTextEl.textContent = this.getAttribute('data-phrase');
+                        phraseTextEl.style.opacity = '1';
+                    }, 250);
+                });
+            });
+
+            // 4. Safe Copy to Clipboard Logic (using custom toast notification)
+            const copyBtn = document.getElementById('copy-email');
+            const toast = document.getElementById('toast-message');
+
+            copyBtn.addEventListener('click', () => {
+                const dummyEmail = 'growth_partner@ssafy.com';
+                
+                // Fallback copy strategy as requested (using document.execCommand('copy'))
+                const textArea = document.createElement("textarea");
+                textArea.value = dummyEmail;
+                textArea.style.position = "fixed";  // Prevent scrolling
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                
+                try {
+                    const successful = document.execCommand('copy');
+                    if(successful) {
+                        // Display toast alert securely
+                        toast.classList.remove('hidden');
+                        toast.classList.add('animate-bounce');
+                        setTimeout(() => {
+                            toast.classList.add('hidden');
+                            toast.classList.remove('animate-bounce');
+                        }, 3500);
+                    }
+                } catch (err) {
+                    console.error('클립보드 복사 에러:', err);
+                }
+                
+                document.body.removeChild(textArea);
+            });
+
+            // 5. Scroll Reveal Animation for interactive components
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+
+            const timelineItems = document.querySelectorAll('.timeline-item');
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('opacity-100', 'translate-y-0');
+                        entry.target.classList.remove('opacity-0', 'translate-y-8');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            timelineItems.forEach(item => {
+                item.classList.add('opacity-0', 'translate-y-8', 'transition-all', 'duration-700');
+                observer.observe(item);
+            });
+        });
+    </script>
+</body>
+</html>
